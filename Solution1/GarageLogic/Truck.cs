@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace GarageLogic
 {
-    public abstract class Truck : Vehicle
+    public class Truck : Vehicle
     {
-        private const int k_NumberOfWheels = 16;
-        private const float k_MaxPressure = 25;
+        internal const int k_NumberOfWheels = 16;
+        internal const float k_MaxPressure = 25;
         
         private float m_CurrentCarryingWeight;
         private bool m_IsCarryingDangerousMeterials;
@@ -29,6 +29,7 @@ namespace GarageLogic
             {
                 return m_CurrentCarryingWeight;
             }
+
             set
             {
                 m_CurrentCarryingWeight = value;
@@ -41,6 +42,7 @@ namespace GarageLogic
             {
                 return m_IsCarryingDangerousMeterials;
             }
+            
             set
             {
                 m_IsCarryingDangerousMeterials = value;
@@ -49,7 +51,7 @@ namespace GarageLogic
 
         public override string ToString()
         {
-            return string.Format("{0}, Number Of Wheels: {1}, Is carrying Dangerous Meterials?: {2}, Maximal Pressure in Wheels: {3}, Current Weight Carrying: {4}", base.ToString(), k_NumberOfWheels, m_IsCarryingDangerousMeterials, k_MaxPressure, m_CurrentCarryingWeight);
+            return string.Format("{0}, Number Of Wheels: {1}, Is carrying Dangerous Meterials?: {2}, Maximal Pressure in Wheels: {3}, Current Weight Carrying: {4}\n", base.ToString(), k_NumberOfWheels, m_IsCarryingDangerousMeterials, k_MaxPressure, m_CurrentCarryingWeight);
         }
     }
 }

@@ -17,17 +17,19 @@ namespace GarageLogic
         }
 
         public void fillGas(float i_GasAmountToFill, eFuelType i_FuelType)
-            
         {
             if (m_FuelType != i_FuelType)
             {
                 throw new ArgumentException("The Gas type is not the right one.");
             }
-            if ((i_GasAmountToFill + m_CurrentEnergy) > MaxEnergy)
+
+            if ((i_GasAmountToFill + CurrentEnergy) > MaxEnergy)
             {
                 throw new ValueOutOfRangeException(MaxEnergy, 0, "Amount of gas to fill");
             }
-            m_CurrentEnergy = m_CurrentEnergy + i_GasAmountToFill;
+
+            CurrentEnergy = CurrentEnergy + i_GasAmountToFill;
+            PrecentegeOfEnergyLeft = (CurrentEnergy * 100) / MaxEnergy;
         }
 
         public eFuelType FuelType
@@ -36,6 +38,16 @@ namespace GarageLogic
             {
                 return m_FuelType;
             }
+
+            set
+            {
+                m_FuelType = value;
+            }
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0}, Fuel Type: {1}", base.ToString(), m_FuelType);
         }
     }
 }

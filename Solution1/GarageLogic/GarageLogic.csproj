@@ -42,16 +42,12 @@
     <Compile Include="eColor.cs" />
     <Compile Include="eEngineType.cs" />
     <Compile Include="eFuelType.cs" />
-    <Compile Include="ElecrtricCar.cs" />
     <Compile Include="ElectricEngine.cs" />
-    <Compile Include="ElectricMotorcycle.cs" />
     <Compile Include="eLicenceType.cs" />
     <Compile Include="Engine.cs" />
     <Compile Include="eVehicleOptions.cs" />
-    <Compile Include="GasCar.cs" />
+    <Compile Include="GarageLogic.cs" />
     <Compile Include="GasEngine.cs" />
-    <Compile Include="GasMotorCycle.cs" />
-    <Compile Include="GasTruck.cs" />
     <Compile Include="MotorCycle.cs" />
     <Compile Include="Truck.cs" />
     <Compile Include="ValueOutOfRangeExeption.cs" />

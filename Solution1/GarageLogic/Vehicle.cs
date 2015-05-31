@@ -29,11 +29,13 @@ namespace GarageLogic
             {
                 return m_EnergyLeft;
             }
+
             set
             {
                 m_EnergyLeft = value;
             }
         }
+
         public string ModelName
         {
             get
@@ -56,6 +58,7 @@ namespace GarageLogic
             {
                 return m_PrecentageOfEnergyLeft;
             }
+
             set
             {
                 m_PrecentageOfEnergyLeft = value;
@@ -76,6 +79,7 @@ namespace GarageLogic
             {
                 return m_Engine;
             }
+
             set
             {
                 m_Engine = value;
@@ -84,7 +88,7 @@ namespace GarageLogic
 
         public override string ToString()
         {
-            return string.Format("ModelName: {0}, Licence Plate: {1}, Precentage Of Energy Left: {2}%, {3}", m_ModelName, m_RegistrationNumber, m_PrecentageOfEnergyLeft, Wheels[0].ToString());
+            return string.Format("ModelName: {0}, Licence Plate: {1}, Precentage Of Energy Left: {2}%, {3}\n", m_ModelName, m_RegistrationNumber, m_PrecentageOfEnergyLeft, Wheels[0].ToString());
         }
     }
 }

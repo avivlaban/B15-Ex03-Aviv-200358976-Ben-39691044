@@ -11,6 +11,7 @@ namespace GarageLogic
         Soler = 1,
         Octan95 = 2,
         Octan96 = 3,
-        Octan98 = 4
+        Octan98 = 4, 
+        None = 5
     }
 }

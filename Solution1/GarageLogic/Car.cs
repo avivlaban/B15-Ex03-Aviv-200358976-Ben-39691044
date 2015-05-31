@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GarageLogic
 {
-    public abstract class Car : Vehicle
+    public class Car : Vehicle
     {
         eColor m_CarColor;
         int m_NumberOfDoors;
@@ -28,6 +28,11 @@ namespace GarageLogic
             {
                 return m_NumberOfDoors;
             }
+
+            set
+            {
+                m_NumberOfDoors = value;
+            }
         }
 
         public eColor CarColor
@@ -36,6 +41,7 @@ namespace GarageLogic
             {
                 return m_CarColor;
             }
+
             set
             {
                 m_CarColor = (eColor)value;
@@ -44,7 +50,7 @@ namespace GarageLogic
 
         public override string ToString()
         {
-            return string.Format("{0}, Number of Doors: {1), Number Of Wheels: {2}, Maximal Air Pressure in the Wheels: {3}, Car's Color: {4}", m_NumberOfDoors, k_NumberOfWheels, k_MaxPressureInWheels, m_CarColor);
+            return string.Format("{0}, Number of Doors: {1), Number Of Wheels: {2}, Maximal Air Pressure in the Wheels: {3}, Car's Color: {4}\n", m_NumberOfDoors, k_NumberOfWheels, k_MaxPressureInWheels, m_CarColor);
         }
     }
 }

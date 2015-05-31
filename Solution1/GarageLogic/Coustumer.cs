@@ -13,7 +13,6 @@ namespace GarageLogic
         private eClientStatus m_ClientStatus;
         private Vehicle m_Vehicle;
 
-
         public Coustumer(string i_OwnerName, string i_OwnerPhone, Vehicle i_Vehicle)
         {
             m_Vehicle = i_Vehicle;
@@ -38,6 +37,19 @@ namespace GarageLogic
             }
         }
 
+        public eClientStatus ClientStatus
+        {
+            get
+            {
+                return m_ClientStatus;
+            }
+
+            set
+            {
+                m_ClientStatus = value;
+            }
+        }
+
         public Vehicle Vehicle
         {
             get
@@ -53,10 +65,12 @@ namespace GarageLogic
             if(this.m_ClientStatus.Equals(eClientStatus.InRepair))
             {
                 coustumerVehicleStatus = "In Repair";
-            }else if(this.m_ClientStatus.Equals(eClientStatus.Paid))
+            }
+            else if(this.m_ClientStatus.Equals(eClientStatus.Paid))
             {
                 coustumerVehicleStatus = "Paid";
-            }else
+            }
+            else
             {
                 coustumerVehicleStatus = "Repaired";
             }
