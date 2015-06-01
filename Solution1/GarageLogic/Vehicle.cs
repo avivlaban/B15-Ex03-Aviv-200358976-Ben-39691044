@@ -12,56 +12,21 @@ namespace GarageLogic
         private float m_PrecentageOfEnergyLeft;
         private List<Wheel> m_Wheels;
         private Engine m_Engine;
+        private const string k_ToStringDetails =
+@"
+Model Name: {0}
+Registration Number: {1}
+{2}
+{3}
+";
 
-        protected Vehicle(string i_ModelName, string i_RegistrationNumber, float i_PrecentageOfEnergyLeft, List<Wheel> i_Wheels)
+        protected Vehicle(string i_ModelName, string i_RegistrationNumber, List<Wheel> i_Wheels)
         {
             m_ModelName = i_ModelName;
             m_RegistrationNumber = i_RegistrationNumber;
-            m_PrecentageOfEnergyLeft = i_PrecentageOfEnergyLeft;
             m_Wheels = i_Wheels;
         }
 
-        public float EnergyLeft
-        {
-            get
-            {
-                return m_EnergyLeft;
-            }
-
-            set
-            {
-                m_EnergyLeft = value;
-            }
-        }
-
-        public string ModelName
-        {
-            get
-            {
-                return m_ModelName;
-            }
-        }
-
-        public string RegistrationNumber
-        {
-            get
-            {
-                return m_RegistrationNumber;
-            }
-        }
-
-        public float PrecentageOfEnergyLeft
-        {
-            get
-            {
-                return m_PrecentageOfEnergyLeft;
-            }
-
-            set
-            {
-                m_PrecentageOfEnergyLeft = value;
-            }
-        }
 
         public List<Wheel> Wheels
         {
@@ -86,7 +51,8 @@ namespace GarageLogic
 
         public override string ToString()
         {
-            return string.Format("ModelName: {0}, Licence Plate: {1}, Precentage Of Energy Left: {2}%, {3}\n", m_ModelName, m_RegistrationNumber, m_PrecentageOfEnergyLeft, Wheels[0].ToString());
+            //return string.Format(k_ToStringDetails, m_ModelName, m_RegistrationNumber, m_PrecentageOfEnergyLeft, Wheels[0].ToString());
+            return string.Format(k_ToStringDetails, m_ModelName, m_RegistrationNumber, m_Engine.ToString(), Wheels[0].ToString());
         }
     }
 }

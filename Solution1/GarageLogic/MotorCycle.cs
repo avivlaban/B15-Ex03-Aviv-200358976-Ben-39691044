@@ -9,55 +9,29 @@ namespace GarageLogic
         internal const int k_NumberOfWheels = 2;
         private int m_EngineVolume;
         private eLicenceType m_LicenceType;
-        private float m_MaxPressure;
+        private const string k_ToStringDetails =
+@"{0}Number Of Wheels: {1}
+Engine Volume: {2}
+Licence Type: {3}
+";
 
-        public MotorCycle(string i_BrandName, string i_RegistrationNumber, float i_PrecentageEnergyLeft, List<Wheel> i_Wheels)
-            : base(i_BrandName, i_RegistrationNumber, i_PrecentageEnergyLeft, i_Wheels)
+        public MotorCycle(string i_BrandName, string i_RegistrationNumber, float i_PrecentageEnergyLeft, List<Wheel> i_Wheels, eLicenceType i_LicenseType, int i_EngineVolume)
+            : base(i_BrandName, i_RegistrationNumber, i_Wheels)
         {
-        }
-
-        public int EngineVolume
-        {
-            get
+            m_LicenceType = i_LicenseType;
+            if (i_EngineVolume <= 0)
             {
-                return m_EngineVolume;
+                throw new ArgumentException("Illegal Engine Volume.");
             }
-
-            set
+            else
             {
-                m_EngineVolume = value;
-            }
-        }
-
-        public eLicenceType LicenceType
-        {
-            get
-            {
-                return m_LicenceType;
-            }
-
-            set
-            {
-                m_LicenceType = value;
-            }
-        }
-
-        public float MaxPressure
-        {
-            get
-            {
-                return m_MaxPressure;
-            }
-
-            set
-            {
-                m_MaxPressure = value;
+                m_EngineVolume = i_EngineVolume;
             }
         }
 
         public override string ToString()
         {
-            return string.Format("{0}, Number Of Wheels: {1}, Engine Volume: {2}, Licence Type: {3}\n", base.ToString(), k_NumberOfWheels, m_EngineVolume, m_LicenceType);
+            return string.Format(k_ToStringDetails, base.ToString(), k_NumberOfWheels, m_EngineVolume, m_LicenceType);
         }
     }
 }

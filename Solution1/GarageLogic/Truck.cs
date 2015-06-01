@@ -10,14 +10,30 @@ namespace GarageLogic
         
         private float m_CurrentCarryingWeight;
         private bool m_IsCarryingDangerousMeterials;
+        private const string k_ToStringDetails =
+@"{0}Number Of Wheels: {1}
+Is carrying Dangerous Meterials?: {2}
+Current Weight Carrying: {3}
+";
 
-        public Truck(string i_BrandName, string i_RegistrationNumber, float i_EnergyLeft, List<Wheel> i_Wheels)
-            : base(i_BrandName, i_RegistrationNumber, i_EnergyLeft, i_Wheels)
+        public Truck(string i_BrandName, string i_RegistrationNumber, float i_EnergyLeft, List<Wheel> i_Wheels, float i_CurrentCarryWeight, bool i_IsCarryingDangerousMaterials)
+            : base(i_BrandName, i_RegistrationNumber, i_Wheels)
         {
-            if (i_Wheels[0].CurrentPressureInWheel > k_MaxPressure)
+            if (i_Wheels[0].CurrentPressureInWheel > i_Wheels[0].MaxAirPressure)
             {
-                throw new ValueOutOfRangeException(k_MaxPressure, 0, "Pressure in Wheels");
+                throw new ValueOutOfRangeException(i_Wheels[0].MaxAirPressure, 0, "Pressure in Wheels");
             }
+
+            if (i_CurrentCarryWeight < 0)
+            {
+                throw new ArgumentException("Current Carry Weight is illegal");
+            }
+            else
+            {
+                m_CurrentCarryingWeight = i_CurrentCarryWeight;
+            }
+
+            m_IsCarryingDangerousMeterials = i_IsCarryingDangerousMaterials;
         }
 
         public float CurrentCarringWeight
@@ -48,7 +64,7 @@ namespace GarageLogic
 
         public override string ToString()
         {
-            return string.Format("{0}, Number Of Wheels: {1}, Is carrying Dangerous Meterials?: {2}, Maximal Pressure in Wheels: {3}, Current Weight Carrying: {4}\n", base.ToString(), k_NumberOfWheels, m_IsCarryingDangerousMeterials, k_MaxPressure, m_CurrentCarryingWeight);
+            return string.Format(k_ToStringDetails, base.ToString(), k_NumberOfWheels, m_IsCarryingDangerousMeterials, m_CurrentCarryingWeight);
         }
     }
 }

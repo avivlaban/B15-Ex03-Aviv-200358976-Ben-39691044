@@ -241,7 +241,7 @@ Enter the amount of minutes to charge: ";
             if (registrationAlreadyInTheGarage)
             {
                 System.Console.WriteLine(string.Format("The car registration you've entered: {0}, is already registered in the system. Updating it's status to \"In Repair\"", vehicleRegistrationEntered));
-                System.Console.WriteLine(m_GarageToManage.DisplayVehicleInformation(vehicleRegistrationEntered));
+                System.Console.WriteLine(m_GarageToManage.DisplayCustomerInformation(vehicleRegistrationEntered));
                 pressEnterToContinue();
             }
             else
@@ -310,9 +310,19 @@ Enter the amount of minutes to charge: ";
             }
 
             getGasEngineDetails(out selectedFuelType, out currentFuelInVehicleInLiters);
-            vehicleCreated = m_GarageToManage.CreateTruck(i_BrandName, i_VehicleRegistration, currentFuelInVehicleInLiters, isCurrentLoadDangerous, weightOfCurrentLoad, i_WheelsManufacturerName, i_WheelsCurrentAirPressure, selectedFuelType);
-            m_GarageToManage.AddVehicleToGarage(i_OwnerName, i_OwnerPhoneNumber, i_VehicleRegistration, vehicleCreated);
-            System.Console.WriteLine(string.Format("Successfuly added vehicle to the garage. Details:\n{0}", m_GarageToManage.DisplayVehicleInformation(i_VehicleRegistration)));
+            try
+            {
+                vehicleCreated = m_GarageToManage.CreateTruck(i_BrandName, i_VehicleRegistration, currentFuelInVehicleInLiters, isCurrentLoadDangerous, weightOfCurrentLoad, i_WheelsManufacturerName, i_WheelsCurrentAirPressure, selectedFuelType);
+                m_GarageToManage.AddVehicleToGarage(i_OwnerName, i_OwnerPhoneNumber, i_VehicleRegistration, vehicleCreated);
+                System.Console.WriteLine(string.Format("Successfuly added vehicle to the garage. Details:\n{0}", m_GarageToManage.DisplayCustomerInformation(i_VehicleRegistration)));
+            }
+            catch (Exception exception)
+            {
+                System.Console.WriteLine("An error has occurred: \n{0}", exception.Message);
+
+            };
+            
+            
             pressEnterToContinue();
         }
 
@@ -334,25 +344,32 @@ Enter the amount of minutes to charge: ";
                 engineCCEntered = System.Console.ReadLine();
             }
 
-
-            if (i_EngineType == GarageLogic.eEngineType.Gas)
+            try
             {
-                GarageLogic.eFuelType selectedFuelType = GarageLogic.eFuelType.Octan95;
-                float currentFuelInVehicleInLiters = 0;
+                if (i_EngineType == GarageLogic.eEngineType.Gas)
+                {
+                    GarageLogic.eFuelType selectedFuelType = GarageLogic.eFuelType.Octan95;
+                    float currentFuelInVehicleInLiters = 0;
 
-                getGasEngineDetails(out selectedFuelType, out currentFuelInVehicleInLiters);
-                vehicleCreated = m_GarageToManage.CreateMotorcycle(i_EngineType, motorcycleLicense, i_BrandName, i_VehicleRegistration, currentFuelInVehicleInLiters, engineCC, i_WheelsManufacturerName, i_WheelsCurrentAirPressure, selectedFuelType);
+                    getGasEngineDetails(out selectedFuelType, out currentFuelInVehicleInLiters);
+                    vehicleCreated = m_GarageToManage.CreateMotorcycle(i_EngineType, motorcycleLicense, i_BrandName, i_VehicleRegistration, currentFuelInVehicleInLiters, engineCC, i_WheelsManufacturerName, i_WheelsCurrentAirPressure, selectedFuelType);
 
+                }
+                else
+                {
+                    float currentChargeTimeInHours = 0;
+                    getElectricEngineDetails(out currentChargeTimeInHours);
+                    vehicleCreated = m_GarageToManage.CreateMotorcycle(i_EngineType, motorcycleLicense, i_BrandName, i_VehicleRegistration, currentChargeTimeInHours, engineCC, i_WheelsManufacturerName, i_WheelsCurrentAirPressure, GarageLogic.eFuelType.None);
+                }
+
+                m_GarageToManage.AddVehicleToGarage(i_OwnerName, i_OwnerPhoneNumber, i_VehicleRegistration, vehicleCreated);
+                System.Console.WriteLine(string.Format("Successfuly added vehicle to the garage. Details:\n{0}", m_GarageToManage.DisplayCustomerInformation(i_VehicleRegistration)));
             }
-            else
+            catch (Exception exception)
             {
-                float currentChargeTimeInHours = 0;
-                getElectricEngineDetails(out currentChargeTimeInHours);
-                vehicleCreated = m_GarageToManage.CreateMotorcycle(i_EngineType, motorcycleLicense, i_BrandName, i_VehicleRegistration, currentChargeTimeInHours, engineCC, i_WheelsManufacturerName, i_WheelsCurrentAirPressure, GarageLogic.eFuelType.None);
-            }
-
-            m_GarageToManage.AddVehicleToGarage(i_OwnerName, i_OwnerPhoneNumber, i_VehicleRegistration, vehicleCreated);
-            System.Console.WriteLine(string.Format("Successfuly added vehicle to the garage. Details:\n{0}", m_GarageToManage.DisplayVehicleInformation(i_VehicleRegistration)));
+                System.Console.WriteLine("An error has occurred: \n{0}", exception.Message);
+            };
+            
             pressEnterToContinue();
         }
 
@@ -374,25 +391,31 @@ Enter the amount of minutes to charge: ";
                 numberOfDoorsEntered = System.Console.ReadLine();
             }
 
-
-            if (i_EngineType == GarageLogic.eEngineType.Gas)
+            try
             {
-                GarageLogic.eFuelType selectedFuelType = GarageLogic.eFuelType.Octan95;
-                float currentFuelInVehicleInLiters = 0;
+                if (i_EngineType == GarageLogic.eEngineType.Gas)
+                {
+                    GarageLogic.eFuelType selectedFuelType = GarageLogic.eFuelType.Octan95;
+                    float currentFuelInVehicleInLiters = 0;
 
-                getGasEngineDetails(out selectedFuelType, out currentFuelInVehicleInLiters);
-                vehicleCreated = m_GarageToManage.CreateCar(i_EngineType, i_BrandName, i_VehicleRegistration, currentFuelInVehicleInLiters, carColor, numberOfDoors, i_WheelsManufacturerName, i_WheelsCurrentAirPressure, selectedFuelType);
+                    getGasEngineDetails(out selectedFuelType, out currentFuelInVehicleInLiters);
+                    vehicleCreated = m_GarageToManage.CreateCar(i_EngineType, i_BrandName, i_VehicleRegistration, currentFuelInVehicleInLiters, carColor, numberOfDoors, i_WheelsManufacturerName, i_WheelsCurrentAirPressure, selectedFuelType);
 
+                }
+                else
+                {
+                    float currentChargeTimeInHours = 0;
+                    getElectricEngineDetails(out currentChargeTimeInHours);
+                    vehicleCreated = m_GarageToManage.CreateCar(i_EngineType, i_BrandName, i_VehicleRegistration, currentChargeTimeInHours, carColor, numberOfDoors, i_WheelsManufacturerName, i_WheelsCurrentAirPressure, GarageLogic.eFuelType.None);
+                }
+
+                m_GarageToManage.AddVehicleToGarage(i_OwnerName, i_OwnerPhoneNumber, i_VehicleRegistration, vehicleCreated);
+                System.Console.WriteLine(string.Format("Successfuly added vehicle to the garage. Details:\n{0}", m_GarageToManage.DisplayCustomerInformation(i_VehicleRegistration)));
             }
-            else
+            catch (Exception exception)
             {
-                float currentChargeTimeInHours = 0;
-                getElectricEngineDetails(out currentChargeTimeInHours);
-                vehicleCreated = m_GarageToManage.CreateCar(i_EngineType, i_BrandName, i_VehicleRegistration, currentChargeTimeInHours, carColor, numberOfDoors, i_WheelsManufacturerName, i_WheelsCurrentAirPressure, GarageLogic.eFuelType.None);
-            }
-
-            m_GarageToManage.AddVehicleToGarage(i_OwnerName, i_OwnerPhoneNumber, i_VehicleRegistration, vehicleCreated);
-            System.Console.WriteLine(string.Format("Successfuly added vehicle to the garage. Details:\n{0}", m_GarageToManage.DisplayVehicleInformation(i_VehicleRegistration)));
+                System.Console.WriteLine("An error has occurred: \n{0}", exception.Message);
+            };
             pressEnterToContinue();
         }
 
@@ -400,11 +423,11 @@ Enter the amount of minutes to charge: ";
         {
             string currentChargeTimeInHoursEntered = string.Empty;
 
-            System.Console.Write("Please enter the amount of charge left in the vehicle: ");
+            System.Console.Write("Please enter the amount of charge left in the vehicle (In hours): ");
             currentChargeTimeInHoursEntered = System.Console.ReadLine();
             while (!float.TryParse(currentChargeTimeInHoursEntered, out o_CurrentChargeTimeInHours) || o_CurrentChargeTimeInHours < 0)
             {
-                System.Console.Write("Please enter the amount of charge left in the vehicle: ");
+                System.Console.Write("Please enter the amount of charge left in the vehicle (In hours): ");
                 currentChargeTimeInHoursEntered = System.Console.ReadLine();
             }
         }
@@ -435,7 +458,7 @@ Enter the amount of minutes to charge: ";
             o_ManufacturerName = System.Console.ReadLine();
             System.Console.Write("Enter your wheels current Air pressure: ");
             airPressureEntered = System.Console.ReadLine();
-            while (!float.TryParse(airPressureEntered, out o_CurrentAirPressure))
+            while (!float.TryParse(airPressureEntered, out o_CurrentAirPressure) || o_CurrentAirPressure < 0)
             {
                 System.Console.Write("Enter your wheels current Air pressure (please enter a valid number): ");
                 airPressureEntered = System.Console.ReadLine();
@@ -570,8 +593,16 @@ Enter the amount of minutes to charge: ";
                 fuelTypeSelectedByUser = getFuelTypeFromUser(vehicleRegistrationEntered);
                 amountOfFuelToFill = getAmountOfFuelToFillFromUser(vehicleRegistrationEntered, fuelTypeSelectedByUser);
                 System.Console.WriteLine("Filling gas...");
-                m_GarageToManage.FillGas(vehicleRegistrationEntered, amountOfFuelToFill, fuelTypeSelectedByUser);
-                System.Console.WriteLine("Filled gas succesfuly");
+                try
+                {
+                    m_GarageToManage.FillGas(vehicleRegistrationEntered, amountOfFuelToFill, fuelTypeSelectedByUser);
+                    System.Console.WriteLine("Filled gas succesfuly");
+                }
+                catch (Exception exception)
+                {
+                    System.Console.WriteLine("An error has occurred: \n{0}", exception.Message);
+                }
+                
                 pressEnterToContinue();
             }
             else
@@ -623,12 +654,24 @@ Enter the amount of minutes to charge: ";
 
                 float minutesToChargeIntoBattery = 0;
                 minutesToChargeIntoBattery = getMinutesToChargeIntoBattery(vehicleRegistrationEntered);
-                m_GarageToManage.ChargeBattery(vehicleRegistrationEntered, minutesToChargeIntoBattery);
+                System.Console.WriteLine("Charging the vehicle.");
+                try
+                {
+                    m_GarageToManage.ChargeBattery(vehicleRegistrationEntered, minutesToChargeIntoBattery);
+                    System.Console.WriteLine("Charged Successful.");
+                }
+                catch (Exception exception)
+                {
+                    System.Console.WriteLine("An error has occurred: \n{0}", exception.Message);
+                }
+                
             }
             else
             {
                 vehicleNotFoundInTheSystem();
             }
+
+            pressEnterToContinue();
         }
 
         private float getMinutesToChargeIntoBattery(string i_VehicleRegistration)
@@ -662,7 +705,7 @@ Enter the amount of minutes to charge: ";
             {
                 System.Console.WriteLine(string.Format(r_ShowFullDetailsOnTheVehicleHeader, r_LineSeperator, vehicleRegistrationEntered));
                 System.Console.WriteLine("Car Details");
-                System.Console.WriteLine(m_GarageToManage.DisplayVehicleInformation(vehicleRegistrationEntered));
+                System.Console.WriteLine(m_GarageToManage.DisplayCustomerInformation(vehicleRegistrationEntered));
 
                 pressEnterToContinue();
             }
@@ -714,5 +757,6 @@ Enter the amount of minutes to charge: ";
             System.Console.WriteLine("\nPress Enter to continue...");
             System.Console.ReadLine();
         }
+
     }
 }

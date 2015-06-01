@@ -9,9 +9,15 @@ namespace GarageLogic
         private string m_ManufacturerName;
         private float m_CurrentAirPressure;
         private float m_MaxAirPressure;
+        private const string k_ToStringDetails =
+@"Wheel Manufacturer Name: {0}
+Current Pressure in Wheel: {1}
+Maximal Pressure in Wheel: {2}";
 
         public Wheel(string i_ManufactureName, float i_CurrentAirPressure, float i_MaxAirPressure)
         {
+            m_MaxAirPressure = i_MaxAirPressure;
+            
             if (i_MaxAirPressure < 0)
             {
                 throw new ArgumentException("Pressure needs to be Positive.");
@@ -21,6 +27,10 @@ namespace GarageLogic
             {
                 throw new ValueOutOfRangeException(m_MaxAirPressure, 0, "Air Pressure");
             }
+
+            
+            m_ManufacturerName = i_ManufactureName;
+            m_CurrentAirPressure = i_CurrentAirPressure;
         }
         
         public void fillAirInWheel(float i_AirToAdd) {
@@ -57,7 +67,7 @@ namespace GarageLogic
 
         public override string ToString()
         {
-            return string.Format("Manufactor Name: {0}, Current Pressure in Wheel: {1}, Maximal Pressure in Wheel: {2}\n", m_ManufacturerName, m_CurrentAirPressure, m_MaxAirPressure);
+            return string.Format(k_ToStringDetails, m_ManufacturerName, m_CurrentAirPressure, m_MaxAirPressure);
         }
     }
 }

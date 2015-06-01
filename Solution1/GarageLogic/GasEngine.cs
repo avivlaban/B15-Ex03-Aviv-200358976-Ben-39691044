@@ -7,6 +7,12 @@ namespace GarageLogic
     public class GasEngine : Engine
     {
         private eFuelType m_FuelType;
+        private const string k_ToStringDetails =
+@"Gasoline Based Engine:
+Current Energy Percentage: {0}%
+Current Amount of gas (in liters): {1}
+Max Amount of gas (in liters): {2}
+Fuel Type: {3}";
 
         public GasEngine(float i_CurrentGas, float i_MaxGas, eFuelType i_FuelType)
             : base(i_CurrentGas, i_MaxGas)
@@ -23,11 +29,10 @@ namespace GarageLogic
 
             if ((i_GasAmountToFill + CurrentEnergy) > MaxEnergy)
             {
-                throw new ValueOutOfRangeException(MaxEnergy, 0, "Amount of gas to fill");
+                throw new ValueOutOfRangeException(MaxEnergy - CurrentEnergy, 0, "Amount of gas to fill");
             }
 
             CurrentEnergy = CurrentEnergy + i_GasAmountToFill;
-            PrecentegeOfEnergyLeft = (CurrentEnergy * 100) / MaxEnergy;
         }
 
         public eFuelType FuelType
@@ -45,7 +50,7 @@ namespace GarageLogic
 
         public override string ToString()
         {
-            return string.Format("{0}, Fuel Type: {1}", base.ToString(), m_FuelType);
+            return string.Format(k_ToStringDetails, PrecentageOfEnergyLeft, m_CurrentEnergy, m_MaxEnergy, m_FuelType);
         }
     }
 }

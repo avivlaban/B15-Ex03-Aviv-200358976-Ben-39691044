@@ -29,14 +29,14 @@ namespace GarageLogic
             return truck;
         }
 
-        public string DisplayVehicleInformation(string i_RegistrationNumber)
+        public string DisplayCustomerInformation(string i_RegistrationNumber)
         {
             string informationToDislpay = string.Empty;
 
             if (IsVehicleInGerage(i_RegistrationNumber))
             {
                 Customer vehicleToAttend = m_GarageLog[i_RegistrationNumber];
-                informationToDislpay = vehicleToAttend.Vehicle.ToString();
+                informationToDislpay = vehicleToAttend.ToString();
             }
             else
             {

@@ -10,6 +10,11 @@ namespace GarageLogic
         private string m_OwnerPhone;
         private eClientStatus m_ClientStatus;
         private Vehicle m_Vehicle;
+        private const string k_ToStringDetails =
+@"Owner Name: {0}
+Owner Phone: {1}
+Vehicle: {2}
+";
 
         public Customer(string i_OwnerName, string i_OwnerPhone, Vehicle i_Vehicle)
         {
@@ -78,7 +83,7 @@ namespace GarageLogic
 
         public override string ToString()
         {
-            return string.Format("Owner Name: {0}, Owner Phone: {1}, Vehicle: {2}", m_OwnerName, m_OwnerPhone, m_Vehicle.ToString());
+            return string.Format(k_ToStringDetails, m_OwnerName, m_OwnerPhone, m_Vehicle.ToString());
         }
     }
 }
