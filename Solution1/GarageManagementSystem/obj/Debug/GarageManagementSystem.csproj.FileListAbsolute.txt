@@ -1,7 +1,0 @@
-C:\Data\GitHub\B15-Ex03-Aviv-200358976-Ben-39691044\Solution1\GarageManagementSystem\bin\Debug\GarageManagementSystem.exe
-C:\Data\GitHub\B15-Ex03-Aviv-200358976-Ben-39691044\Solution1\GarageManagementSystem\bin\Debug\GarageManagementSystem.pdb
-C:\Data\GitHub\B15-Ex03-Aviv-200358976-Ben-39691044\Solution1\GarageManagementSystem\bin\Debug\GarageLogic.dll
-C:\Data\GitHub\B15-Ex03-Aviv-200358976-Ben-39691044\Solution1\GarageManagementSystem\bin\Debug\GarageLogic.pdb
-C:\Data\GitHub\B15-Ex03-Aviv-200358976-Ben-39691044\Solution1\GarageManagementSystem\obj\Debug\GarageManagementSystem.csprojResolveAssemblyReference.cache
-C:\Data\GitHub\B15-Ex03-Aviv-200358976-Ben-39691044\Solution1\GarageManagementSystem\obj\Debug\GarageManagementSystem.exe
-C:\Data\GitHub\B15-Ex03-Aviv-200358976-Ben-39691044\Solution1\GarageManagementSystem\obj\Debug\GarageManagementSystem.pdb
