@@ -1,38 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace GarageLogic
 {
     public class GarageLogic
     {
-        private Dictionary<string, Coustumer> m_GarageLog;
+        private Dictionary<string, Customer> m_GarageLog = new Dictionary<string,Customer>();
 
-        public Coustumer CoustumersVehicle(string i_OwnerName, string i_OwnerPhone, Vehicle i_Vehicle)
-        {
-            return new Coustumer(i_OwnerName, i_OwnerPhone, i_Vehicle);
-        }
-
-        public Vehicle CreateMotorcycle(eVehicleOptions i_VehicleOption, eLicenceType i_LicenceType, string i_BrandName, string i_RegistrationNumber, float i_EnergyLeft, float i_MaxEnergy, int i_EngineVolume, string i_WheelManufactureName, float i_WheelCurrentPressure, float i_MaxPressureInWheels, eFuelType i_FuelType)
+        public Vehicle CreateMotorcycle(eEngineType i_EngineType, eLicenceType i_LicenceType, string i_BrandName, string i_RegistrationNumber, float i_EnergyLeft, int i_EngineVolume, string i_WheelManufactureName, float i_WheelCurrentPressure, eFuelType i_FuelType)
         {
             CreateVehicleForGarage newVehicle = new CreateVehicleForGarage();
-            Vehicle motorcycle = newVehicle.CreateMotorcycle(i_VehicleOption, i_LicenceType, i_BrandName, i_RegistrationNumber, i_EnergyLeft, i_MaxEnergy, i_EngineVolume, i_WheelManufactureName, i_WheelCurrentPressure, i_MaxPressureInWheels, i_FuelType);
+            Vehicle motorcycle = newVehicle.CreateMotorcycle(i_EngineType, i_LicenceType, i_BrandName, i_RegistrationNumber, i_EnergyLeft, i_EngineVolume, i_WheelManufactureName, i_WheelCurrentPressure, i_FuelType);
             return motorcycle;
         }
 
-        public Vehicle CreateCar(eVehicleOptions i_VehicleOption, string i_BrandName, string i_RegistrationNumber, float i_EnergyLeft, float i_MaxEnergy, eColor i_CarColor, int i_NumberOfDoors, string i_WheelManufactureName, float i_WheelCurrentPressure, eFuelType i_FuelType)
+        public Vehicle CreateCar(eEngineType i_EngineType, string i_BrandName, string i_RegistrationNumber, float i_EnergyLeft, eColor i_CarColor, int i_NumberOfDoors, string i_WheelManufactureName, float i_WheelCurrentPressure, eFuelType i_FuelType)
         {
             CreateVehicleForGarage newVehicle = new CreateVehicleForGarage();
-            Vehicle car = newVehicle.CreateCar(i_VehicleOption, i_BrandName, i_RegistrationNumber, i_EnergyLeft, i_MaxEnergy, i_CarColor, i_NumberOfDoors, i_WheelManufactureName, i_WheelCurrentPressure, i_FuelType);
+            Vehicle car = newVehicle.CreateCar(i_EngineType, i_BrandName, i_RegistrationNumber, i_EnergyLeft, i_CarColor, i_NumberOfDoors, i_WheelManufactureName, i_WheelCurrentPressure, i_FuelType);
             return car;
         }
 
-        public Vehicle CreateTruck(string i_BrandName, string i_RegistrationNumber, float i_EnergyLeft, float i_MaxEnergy, bool i_IsCarryingDangerousMeterials, float i_CurrentCarryingWeight, string i_WheelManufactureName, float i_WheelCurrentPressure, eFuelType i_FuelType)
+        public Vehicle CreateTruck(string i_BrandName, string i_RegistrationNumber, float i_EnergyLeft, bool i_IsCarryingDangerousMeterials, float i_CurrentCarryingWeight, string i_WheelManufactureName, float i_WheelCurrentPressure, eFuelType i_FuelType)
         {
             CreateVehicleForGarage newVehicle = new CreateVehicleForGarage();
-            Vehicle truck = newVehicle.CreateTruck(i_BrandName, i_RegistrationNumber, i_EnergyLeft, i_MaxEnergy, i_IsCarryingDangerousMeterials, i_CurrentCarryingWeight, i_WheelManufactureName, i_WheelCurrentPressure, i_FuelType);
+            Vehicle truck = newVehicle.CreateTruck(i_BrandName, i_RegistrationNumber, i_EnergyLeft, i_IsCarryingDangerousMeterials, i_CurrentCarryingWeight, i_WheelManufactureName, i_WheelCurrentPressure, i_FuelType);
             return truck;
         }
 
@@ -42,7 +35,7 @@ namespace GarageLogic
 
             if (IsVehicleInGerage(i_RegistrationNumber))
             {
-                Coustumer vehicleToAttend = m_GarageLog[i_RegistrationNumber];
+                Customer vehicleToAttend = m_GarageLog[i_RegistrationNumber];
                 informationToDislpay = vehicleToAttend.Vehicle.ToString();
             }
             else
@@ -64,33 +57,33 @@ namespace GarageLogic
             return isVehicleInGarage;
         }
 
-        public void AddVehicleToGarage(string i_RegiatrationNumber, Coustumer i_Vehicle)
+        public void AddVehicleToGarage(string i_OwnerName, string i_OwnerPhone, string i_RegistrationNumber, Vehicle i_Vehicle)
         {
-            if (IsVehicleInGerage(i_RegiatrationNumber))
+            if (IsVehicleInGerage(i_RegistrationNumber))
             {
-                i_Vehicle.ClientStatus = eClientStatus.InRepair;
+                m_GarageLog[i_RegistrationNumber].ClientStatus = eClientStatus.InRepair;
             }
             else
             {
-                m_GarageLog.Add(i_RegiatrationNumber, i_Vehicle);
+                m_GarageLog.Add(i_RegistrationNumber, new Customer(i_OwnerName, i_OwnerPhone, i_Vehicle));
             }
         }
 
-        public List<string> ListOfAllLicenceNumbersInGarage(eClientStatus i_ClientStstus)
+        public List<string> ListOfAllLicenceNumbersInGarage(eClientStatus i_ClientStatus)
         {
             List<string> licenceNumbersToReturn = new List<string>();
-            if(i_ClientStstus == eClientStatus.All)
+            if(i_ClientStatus == eClientStatus.All)
             {
-                foreach(KeyValuePair<string, Coustumer> client in m_GarageLog)
+                foreach(KeyValuePair<string, Customer> client in m_GarageLog)
                 {
                     licenceNumbersToReturn.Add(client.Key);
                 }
             }
             else
             {
-                foreach(KeyValuePair<string, Coustumer> client in m_GarageLog)
+                foreach(KeyValuePair<string, Customer> client in m_GarageLog)
                 {
-                    if(client.Value.ClientStatus == i_ClientStstus)
+                    if(client.Value.ClientStatus == i_ClientStatus)
                     {
                         licenceNumbersToReturn.Add(client.Key);
                     }
@@ -102,7 +95,7 @@ namespace GarageLogic
 
         public void ChangeStatusOfVehicle(eClientStatus i_ClientStatus, string i_RegistrationNumber)
         {
-            Coustumer vehicleToChange;
+            Customer vehicleToChange;
             if(!IsVehicleInGerage(i_RegistrationNumber))
             {
                 throw new FormatException("The vehicle is not in the Garage!");
@@ -114,16 +107,17 @@ namespace GarageLogic
             }
         }
 
-        public void FillGas(string i_RegistrationNumber, float i_MinToFill, eFuelType i_FuelType)
+        public void FillGas(string i_RegistrationNumber, float i_LitersToFill, eFuelType i_FuelType)
         {
-            float hoursToFill = i_MinToFill / 60;
-            Coustumer vehicleToAttend;
+            float hoursToFill = i_LitersToFill;
+            Customer vehicleToAttend;
             if (IsVehicleInGerage(i_RegistrationNumber))
             {
                 vehicleToAttend = m_GarageLog[i_RegistrationNumber];
-                if (vehicleToAttend.Vehicle.Engine is GasEngine)
+                GasEngine engineAsGasEngine = vehicleToAttend.Vehicle.Engine as GasEngine;
+                if (engineAsGasEngine != null)
                 {
-                    (vehicleToAttend.Vehicle.Engine as GasEngine).fillGas(hoursToFill, i_FuelType);
+                    engineAsGasEngine.fillGas(hoursToFill, i_FuelType);
                 }
                 else
                 {
@@ -139,13 +133,14 @@ namespace GarageLogic
         public void ChargeBattery(string i_RegistrationNumber, float i_MinToFill)
         {
             float hoursToCharge = i_MinToFill / 60;
-            Coustumer vehicleToAttend;
+            Customer vehicleToAttend;
             if (IsVehicleInGerage(i_RegistrationNumber))
             {
                 vehicleToAttend = m_GarageLog[i_RegistrationNumber];
-                if (vehicleToAttend.Vehicle.Engine is ElectricEngine)
+                ElectricEngine engineAsElectricEngine = vehicleToAttend.Vehicle.Engine as ElectricEngine;
+                if (engineAsElectricEngine != null)
                 {
-                    (vehicleToAttend.Vehicle.Engine as ElectricEngine).ChargeBattery(hoursToCharge);
+                    engineAsElectricEngine.ChargeBattery(hoursToCharge);
                 }
                 else
                 {
@@ -161,7 +156,7 @@ namespace GarageLogic
         public void FillAirInWheels(string i_RegistrationNumber)
         {
             float airToFill;
-            Coustumer vehicleToAttend;
+            Customer vehicleToAttend;
             if (!IsVehicleInGerage(i_RegistrationNumber))
             {
                 throw new FormatException("The vehicle is not in the Garage!");

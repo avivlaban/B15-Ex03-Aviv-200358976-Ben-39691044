@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace GarageLogic
 {
     public class Truck : Vehicle
     {
         internal const int k_NumberOfWheels = 16;
-        internal const float k_MaxPressure = 25;
         
         private float m_CurrentCarryingWeight;
         private bool m_IsCarryingDangerousMeterials;

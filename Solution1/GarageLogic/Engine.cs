@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace GarageLogic
 {
@@ -14,7 +12,7 @@ namespace GarageLogic
 
         protected Engine(float i_CurrentEnergy, float i_MaxEnergy)
         {
-            if (m_MaxEnergy <= 0)
+            if (i_MaxEnergy <= 0)
             {
                 throw new ArgumentException("Error: Max Energy should be positive");
             }

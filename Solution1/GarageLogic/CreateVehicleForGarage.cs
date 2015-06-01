@@ -1,29 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace GarageLogic
 {
+    
+
     public class CreateVehicleForGarage
     {
-        public Vehicle CreateMotorcycle(eVehicleOptions i_VehicleOption, eLicenceType i_LicenceType, string i_BrandName, string i_RegistrationNumber, float i_EnergyLeft, float i_MaxEnergy, int i_EngineVolume, string i_WheelManufactureName, float i_WheelCurrentPressure, float i_MaxPressureInWheels, eFuelType i_FuelType)
+
+        private const float k_GasMotorCycleEngineVolume = 8f;
+        private const float k_ElectricMotorCycleMaxChargeTime = 1.2f;
+        private const float k_GasCarEngineVolume = 35f;
+        private const float k_ElectricCarMaxChargeTime = 2.2f;
+        private const float k_GasTruckEngineVolume = 170f;
+
+        public Vehicle CreateMotorcycle(eEngineType i_EngineType, eLicenceType i_LicenceType, string i_BrandName, string i_RegistrationNumber, float i_EnergyLeft, int i_EngineVolume, string i_WheelManufactureName, float i_WheelCurrentPressure, float i_MaxPressureInWheels, eFuelType i_FuelType)
         {
             Vehicle motorcycle;
-            if (i_VehicleOption.Equals(eVehicleOptions.ElectricMotorcycle))
+            if (i_EngineType.Equals(eEngineType.Electric))
             {
                 motorcycle = new MotorCycle(i_BrandName, i_RegistrationNumber, i_EnergyLeft, CreateListOfWheels(i_WheelManufactureName, MotorCycle.k_NumberOfWheels, i_WheelCurrentPressure, i_MaxPressureInWheels));
                 ((MotorCycle)motorcycle).LicenceType = i_LicenceType;
                 ((MotorCycle)motorcycle).EngineVolume = i_EngineVolume;
-                motorcycle.Engine = new ElectricEngine(i_EnergyLeft, i_MaxEnergy);
+                motorcycle.Engine = new ElectricEngine(i_EnergyLeft, k_ElectricMotorCycleMaxChargeTime);
             }
-            else if(i_VehicleOption.Equals(eVehicleOptions.GasMotorcycle))
+            else if (i_EngineType.Equals(eEngineType.Gas))
             {
                 motorcycle = new MotorCycle(i_BrandName, i_RegistrationNumber, i_EnergyLeft, CreateListOfWheels(i_WheelManufactureName, MotorCycle.k_NumberOfWheels, i_WheelCurrentPressure, i_MaxPressureInWheels));
                 ((MotorCycle)motorcycle).LicenceType = i_LicenceType;
                 ((MotorCycle)motorcycle).EngineVolume = i_EngineVolume;
-                motorcycle.Engine = new GasEngine(i_EnergyLeft, i_MaxEnergy, i_FuelType);
+                motorcycle.Engine = new GasEngine(i_EnergyLeft, k_GasMotorCycleEngineVolume, i_FuelType);
             }
             else {
                 throw new ArgumentException();
@@ -32,22 +39,22 @@ namespace GarageLogic
             return motorcycle;
         }
 
-        public Vehicle CreateCar(eVehicleOptions i_VehicleOption, string i_BrandName, string i_RegistrationNumber, float i_EnergyLeft, float i_MaxEnergy, eColor i_CarColor, int i_NumberOfDoors, string i_WheelManufactureName, float i_WheelCurrentPressure, eFuelType i_FuelType)
+        public Vehicle CreateCar(eEngineType i_EngineType, string i_BrandName, string i_RegistrationNumber, float i_EnergyLeft, eColor i_CarColor, int i_NumberOfDoors, string i_WheelManufactureName, float i_WheelCurrentPressure, eFuelType i_FuelType)
         {
             Vehicle car;
-            if (i_VehicleOption.Equals(eVehicleOptions.ElectricCar))
+            if (i_EngineType.Equals(eEngineType.Electric))
             {
                 car = new Car(i_BrandName, i_RegistrationNumber, i_EnergyLeft, CreateListOfWheels(i_WheelManufactureName, Car.k_NumberOfWheels, i_WheelCurrentPressure, Car.k_MaxPressureInWheels));
                 ((Car)car).CarColor = i_CarColor;
                 ((Car)car).NumberOfDoors = i_NumberOfDoors;
-                car.Engine = new ElectricEngine(i_EnergyLeft, i_MaxEnergy);
+                car.Engine = new ElectricEngine(i_EnergyLeft, k_ElectricCarMaxChargeTime);
             }
-            else if (i_VehicleOption.Equals(eVehicleOptions.GasCar))
+            else if (i_EngineType.Equals(eEngineType.Gas))
             {
                 car = new Car(i_BrandName, i_RegistrationNumber, i_EnergyLeft, CreateListOfWheels(i_WheelManufactureName, Car.k_NumberOfWheels, i_WheelCurrentPressure, Car.k_MaxPressureInWheels));
                 ((Car)car).CarColor = i_CarColor;
                 ((Car)car).NumberOfDoors = i_NumberOfDoors;
-                car.Engine = new GasEngine(i_EnergyLeft, i_MaxEnergy, i_FuelType);
+                car.Engine = new GasEngine(i_EnergyLeft, k_GasCarEngineVolume, i_FuelType);
             }
             else
             {
@@ -57,14 +64,14 @@ namespace GarageLogic
             return car;
         }
 
-        public Vehicle CreateTruck(string i_BrandName, string i_RegistrationNumber, float i_EnergyLeft, float i_MaxEnergy, bool i_IsCarryingDangerousMeterials, float i_CurrentCarryingWeight, string i_WheelManufactureName, float i_WheelCurrentPressure, eFuelType i_FuelType)
+        public Vehicle CreateTruck(string i_BrandName, string i_RegistrationNumber, float i_EnergyLeft, bool i_IsCarryingDangerousMeterials, float i_CurrentCarryingWeight, string i_WheelManufactureName, float i_WheelCurrentPressure, eFuelType i_FuelType)
         {
             Vehicle truck;
 
             truck = new Truck(i_BrandName, i_RegistrationNumber, i_EnergyLeft, CreateListOfWheels(i_WheelManufactureName, Truck.k_NumberOfWheels, i_WheelCurrentPressure, Truck.k_MaxPressure));
             ((Truck)truck).IsCarringDangerousMeterials = i_IsCarryingDangerousMeterials;
             ((Truck)truck).CurrentCarringWeight = i_CurrentCarryingWeight;
-            truck.Engine = new GasEngine(i_EnergyLeft, i_MaxEnergy, i_FuelType);
+            truck.Engine = new GasEngine(i_EnergyLeft, k_GasTruckEngineVolume, i_FuelType);
 
             return truck;
         }

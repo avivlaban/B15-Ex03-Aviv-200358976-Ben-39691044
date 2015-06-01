@@ -1,3 +1,9 @@
 \\psf\Dropbox\הבינתחומי\שנה שנייה\סמסטר ב\מבוא ל-C#\ShareC#\Ex03 - C#\Solution1\GarageLogic\bin\Debug\GarageLogic.exe.config
 C:\Data\Dropbox\ShareC#\Ex03 - C#\Solution1\GarageLogic\bin\Debug\GarageLogic.exe.config
 \\psf\Dropbox\הבינתחומי\שנה שנייה\סמסטר ב\מבוא ל-C#\ShareC#\Ex03 - C#\Solution1\GarageLogic\obj\Debug\GarageLogic.csprojResolveAssemblyReference.cache
+C:\Data\GitHub\B15-Ex03-Aviv-200358976-Ben-39691044\Solution1\GarageLogic\obj\Debug\GarageLogic.csprojResolveAssemblyReference.cache
+C:\Data\GitHub\B15-Ex03-Aviv-200358976-Ben-39691044\Solution1\GarageLogic\bin\Debug\GarageLogic.dll.config
+C:\Data\GitHub\B15-Ex03-Aviv-200358976-Ben-39691044\Solution1\GarageLogic\bin\Debug\GarageLogic.dll
+C:\Data\GitHub\B15-Ex03-Aviv-200358976-Ben-39691044\Solution1\GarageLogic\bin\Debug\GarageLogic.pdb
+C:\Data\GitHub\B15-Ex03-Aviv-200358976-Ben-39691044\Solution1\GarageLogic\obj\Debug\GarageLogic.dll
+C:\Data\GitHub\B15-Ex03-Aviv-200358976-Ben-39691044\Solution1\GarageLogic\obj\Debug\GarageLogic.pdb
