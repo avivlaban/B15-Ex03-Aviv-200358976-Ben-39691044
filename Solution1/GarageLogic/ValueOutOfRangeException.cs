@@ -22,7 +22,7 @@ namespace GarageLogic
         {
             get
             {
-                return string.Format("Exception: {0} Input is out of proper range. Input should be in the range: {1} - {2}", m_WrongInput, m_MinValue, m_MaxValue);
+                return string.Format("Exception: {0} input is out of proper range. Input should be in the range: {1} - {2}", m_WrongInput, m_MinValue, m_MaxValue);
             }
         }
     }

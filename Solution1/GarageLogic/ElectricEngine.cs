@@ -8,7 +8,7 @@ namespace GarageLogic
     {
         private const string k_ToStringDetails =
 @"Battery Based Engine:
-Current Energy Percentage: {0}%
+Current Energy Percentage: {0:0.##}%
 Current Charge Time: {1}
 Max Charge Time: {2}";
         

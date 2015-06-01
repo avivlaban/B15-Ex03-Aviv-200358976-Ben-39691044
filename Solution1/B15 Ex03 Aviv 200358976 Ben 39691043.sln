@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageLogic", "GarageLogic\GarageLogic.csproj", "{4419D86E-DC8B-4DF6-B1D9-EE3CD3D85286}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageManagementSystem", "GarageManagementSystem\GarageManagementSystem.csproj", "{0746869A-EE4A-4FCF-B103-D02A3F407264}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageManagementSystem.ConsoleUI", "GarageManagementSystem\GarageManagementSystem.ConsoleUI.csproj", "{0746869A-EE4A-4FCF-B103-D02A3F407264}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

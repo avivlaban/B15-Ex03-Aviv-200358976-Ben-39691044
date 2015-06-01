@@ -9,7 +9,7 @@ namespace GarageLogic
         private eFuelType m_FuelType;
         private const string k_ToStringDetails =
 @"Gasoline Based Engine:
-Current Energy Percentage: {0}%
+Current Energy Percentage: {0:0.##}%
 Current Amount of gas (in liters): {1}
 Max Amount of gas (in liters): {2}
 Fuel Type: {3}";

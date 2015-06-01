@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GarageManagementSystem
+namespace GarageManagementSystem.ConsoleUI
 {
     public class Program
     {
